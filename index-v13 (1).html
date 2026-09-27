@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>文档小站 V1.3</title>
+  <meta name="description" content="浏览器本地完成 PDF 合并、拆分、旋转、图片转 PDF、PDF 转图片。文件默认不上传服务器。" />
+  <style>
+    :root{--bg:#0b1020;--panel:#121a2d;--card:#18233a;--text:#edf2ff;--muted:#aab6d4;--accent:#7c9cff;--accent2:#9ce8d9;--danger:#ff8f8f}
+    *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:linear-gradient(180deg,#0a0f1e,#10172a);color:var(--text);min-height:100vh}.wrap{max-width:1120px;margin:0 auto;padding:28px 18px 70px}.hero{padding:30px 0 18px}.hero h1{font-size:clamp(30px,6vw,56px);margin:0 0 12px}.hero p{color:var(--muted);font-size:clamp(15px,2.5vw,18px);line-height:1.7;max-width:760px}.badge{display:inline-block;padding:7px 11px;border-radius:999px;background:#1c2946;color:#bcd0ff;font-size:13px;margin-bottom:14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{background:rgba(24,35,58,.92);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:18px;box-shadow:0 14px 40px rgba(0,0,0,.18)}.card h2{font-size:20px;margin:0 0 8px}.card p{margin:0 0 14px;color:var(--muted);line-height:1.55}.drop{border:1.5px dashed #4b5f91;border-radius:14px;padding:16px;background:#10182a}.drop input{width:100%;color:var(--muted)}.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}.row input[type=number],.row input[type=text]{flex:1;min-width:110px;background:#0d1425;border:1px solid #344464;color:var(--text);border-radius:10px;padding:10px}.btn{appearance:none;border:0;border-radius:11px;padding:11px 14px;background:var(--accent);color:#0b1020;font-weight:700;cursor:pointer}.btn.secondary{background:#293857;color:#e7eeff}.btn:disabled{opacity:.55;cursor:not-allowed}.status{font-size:13px;color:var(--muted);margin-top:10px;min-height:20px}.footer{margin-top:24px;color:var(--muted);font-size:13px;line-height:1.7}.privacy{color:var(--accent2)}.warn{color:#ffd59e}@media(max-width:760px){.grid{grid-template-columns:1fr}.wrap{padding:20px 14px 56px}.card{padding:15px}.hero{padding-top:16px}}
+
+    body{font-size:16px}.hero{padding:10px 0 18px}.hero h1{font-size:36px}.hero p{font-size:16px}.card{min-width:0}.status{font-size:14px;overflow-wrap:anywhere}.hint{font-size:14px!important;margin:12px 0!important}.row{align-items:center}.row select{flex:1;min-width:0;max-width:100%;padding:10px;border-radius:10px;background:#0d1425;color:var(--text);border:1px solid #4b5f91;font:inherit}input{font:inherit;max-width:100%}.drop input{font-size:14px}button{font:inherit;min-height:44px}.download{background:var(--accent2);margin-top:10px;min-width:150px}.download:disabled{background:#344464;color:#aab6d4}.result-name{font-size:14px;color:var(--muted);overflow-wrap:anywhere;margin-top:8px}.error{color:var(--danger)}:focus-visible{outline:3px solid #9ce8d9;outline-offset:3px}.footer{font-size:14px}.badge{font-size:14px}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="badge">V1.3 · 手机上传版 · 浏览器本地处理</div>
+    <h1>文档小站</h1>
+    <p><span class="privacy">默认不上传文件。</span> PDF 转 Word / PPTX / TXT，以及合并、拆分、旋转、图片互转，直接在你的浏览器里完成。适合手机和电脑使用。</p>
+  </section>
+
+  <main class="grid">
+    <section class="card" data-task="word">
+      <h2>PDF → Word</h2><p>生成 DOCX，按需要选择文字编辑或保留外观。</p>
+      <div class="drop"><input id="wordFile" aria-label="选择要转 Word 的 PDF" type="file" accept=".pdf,application/pdf"></div>
+      <div class="row"><label for="wordMode">转换模式</label><select id="wordMode"><option value="text">可编辑文字</option><option value="image">保留页面外观（图片）</option></select></div>
+      <p class="hint" id="wordHint">提取文字并按行排版，不保留原图片、表格结构及公式格式；扫描件需先做 OCR。</p>
+      <div class="row"><button class="btn" data-run="word">开始转换</button></div>
+      <div class="status" id="wordStatus" role="status" aria-live="polite"></div>
+    </section>
+    <section class="card" data-task="ppt">
+      <h2>PDF → PPTX</h2><p>每页 PDF 生成一张幻灯片，保留页面外观。</p>
+      <div class="drop"><input id="pptFile" aria-label="选择要转 PPTX 的 PDF" type="file" accept=".pdf,application/pdf"></div>
+      <p class="hint">页面以图片形式放入幻灯片，文字无法单独编辑。</p>
+      <div class="row"><button class="btn" data-run="ppt">开始转换</button></div>
+      <div class="status" id="pptStatus" role="status" aria-live="polite"></div>
+    </section>
+    <section class="card" data-task="text">
+      <h2>PDF → TXT</h2><p>提取 PDF 的文字，导出 UTF-8 文本文件。</p>
+      <div class="drop"><input id="textFile" aria-label="选择要提取文字的 PDF" type="file" accept=".pdf,application/pdf"></div>
+      <p class="hint">适用于能选中文字的 PDF；扫描件暂不支持文字识别。</p>
+      <div class="row"><button class="btn" data-run="text">提取文字</button></div>
+      <div class="status" id="textStatus" role="status" aria-live="polite"></div>
+    </section>
+
+    <section class="card" data-task="merge">
+      <h2>PDF 合并</h2><p>按选择顺序合并多个 PDF。</p>
+      <div class="drop"><input id="mergeFiles" type="file" accept="application/pdf" multiple></div>
+      <div class="row"><button class="btn" data-run="merge">开始合并</button></div>
+      <div class="status" id="mergeStatus"></div>
+    </section>
+
+    <section class="card" data-task="split">
+      <h2>PDF 拆分</h2><p>提取指定页，例如：1,3,5-8。</p>
+      <div class="drop"><input id="splitFile" type="file" accept="application/pdf"></div>
+      <div class="row"><input id="splitPages" type="text" placeholder="例如 1,3,5-8"><button class="btn" data-run="split">提取页面</button></div>
+      <div class="status" id="splitStatus"></div>
+    </section>
+
+    <section class="card" data-task="rotate">
+      <h2>PDF 旋转</h2><p>将整个 PDF 的所有页面顺时针旋转。</p>
+      <div class="drop"><input id="rotateFile" type="file" accept="application/pdf"></div>
+      <div class="row"><button class="btn secondary" data-run="rotate" data-angle="90">旋转 90°</button><button class="btn secondary" data-run="rotate" data-angle="180">旋转 180°</button><button class="btn secondary" data-run="rotate" data-angle="270">旋转 270°</button></div>
+      <div class="status" id="rotateStatus"></div>
+    </section>
+
+    <section class="card" data-task="image">
+      <h2>图片 → PDF</h2><p>支持 JPG / PNG，多张图片按选择顺序生成 PDF。</p>
+      <div class="drop"><input id="imageFiles" type="file" accept="image/png,image/jpeg" multiple></div>
+      <div class="row"><button class="btn" data-run="image">生成 PDF</button></div>
+      <div class="status" id="imageStatus"></div>
+    </section>
+
+    <section class="card" data-task="pdfImage">
+      <h2>PDF → 图片</h2><p>将 PDF 每一页导出为 PNG，并打包为 ZIP 下载。</p>
+      <div class="drop"><input id="pdfImageFile" type="file" accept="application/pdf"></div>
+      <div class="row"><button class="btn" data-run="pdfImage">生成图片 ZIP</button></div>
+      <div class="status" id="pdfImageStatus"></div>
+    </section>
+
+
+  </main>
+
+  <div class="footer">隐私说明：文件处理仍在浏览器本地执行；首次使用需联网加载 PDF/Word/PPT 处理组件。超大 PDF 或低内存手机可能处理较慢；建议单文件先控制在 50MB 以内。</div>
+</div>
+<!-- 手机上传版：第三方组件从固定版本 CDN 加载，仓库不再需要 vendor/ 目录。 -->
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+<script type="module">
+import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.min.mjs';
+pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/build/pdf.worker.min.mjs';
+const $ = id => document.getElementById(id);
+const { PDFDocument, degrees } = window.PDFLib;
+const states = new Map();
+const libraries = new Map();
+const LIMIT = 50 * 1024 * 1024;
+
+function loadScript(src) {
+  if (!libraries.has(src)) libraries.set(src, new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src; script.onload = resolve;
+    script.onerror = () => { libraries.delete(src); script.remove(); reject(new Error('在线组件加载失败，请检查网络后刷新重试')); };
+    document.head.appendChild(script);
+  }));
+  return libraries.get(src);
+}
+function status(task, message, error = false) {
+  const node = $(task + 'Status'); node.textContent = message; node.classList.toggle('error', error);
+}
+function clearResult(task) {
+  const s = states.get(task);
+  if (s.url) URL.revokeObjectURL(s.url);
+  s.url = null; s.download.disabled = true; s.name.textContent = '';
+}
+function fileBase(file) { return file.name.replace(/\.[^.]+$/, '').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').slice(0, 100) || 'document'; }
+function selected(id, multiple = false) {
+  const files = Array.from($(id).files);
+  if (!files.length) throw new Error('请先选择文件');
+  if (files.reduce((n, f) => n + f.size, 0) > LIMIT) throw new Error('本次文件总大小超过 50 MB，请分批处理');
+  return multiple ? files : files[0];
+}
+async function run(task, job) {
+  const s = states.get(task); if (s.busy) return;
+  clearResult(task); s.busy = true;
+  const controls = [...s.card.querySelectorAll('input, select, button:not(.download)')];
+  controls.forEach(node => node.disabled = true); status(task, '处理中…');
+  try {
+    const result = await job();
+    if (!result.blob.size) throw new Error('没有生成可下载内容');
+    s.url = URL.createObjectURL(result.blob); s.filename = result.name;
+    s.name.textContent = result.name + ' · ' + (result.blob.size / 1024).toFixed(1) + ' KB';
+    s.download.disabled = false; status(task, result.message || '处理完成，请点击下方按钮下载。');
+  } catch (e) {
+    const message = /password|encrypted/i.test(e.message) ? '文件已加密，请先解锁 PDF 后重试。' : /Invalid PDF|PDF structure|No PDF header/i.test(e.message) ? 'PDF 文件已损坏或格式无效，请重新选择文件。' : (e.message || '文件无法处理，请检查格式后重试');
+    status(task, '未完成：' + message, true);
+  } finally { s.busy = false; controls.forEach(node => node.disabled = false); }
+}
+function output(bytes, name, type = 'application/pdf', message) { return { blob: bytes instanceof Blob ? bytes : new Blob([bytes], { type }), name, message }; }
+
+// Validate the entire expression before expanding it: no silent truncation or huge loops.
+function parsePages(spec, max) {
+  const ids = new Set(); const parts = spec.replaceAll('，', ',').split(',');
+  if (!spec.trim()) throw new Error('请输入页码，例如 1,3,5-8');
+  for (const raw of parts) {
+    const match = raw.trim().match(/^(\d+)(?:\s*-\s*(\d+))?$/);
+    if (!match) throw new Error('页码格式无效，请使用 1,3,5-8 这样的格式');
+    let a = Number(match[1]), b = Number(match[2] || match[1]);
+    if (!Number.isSafeInteger(a) || !Number.isSafeInteger(b) || a < 1 || b < 1 || a > max || b > max) throw new Error('页码超出范围：此文件共 ' + max + ' 页');
+    if (a > b) [a, b] = [b, a];
+    for (let i = a; i <= b; i++) ids.add(i - 1);
+  }
+  return [...ids].sort((a, b) => a - b);
+}
+async function withPdf(file, task, fn) {
+  const loader = pdfjs.getDocument({ data: new Uint8Array(await file.arrayBuffer()), cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/cmaps/', cMapPacked: true, standardFontDataUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/standard_fonts/', wasmUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/wasm/', isEvalSupported: false });
+  let rejectPassword;
+  const passwordError = new Promise((resolve, reject) => { rejectPassword = reject; });
+  loader.onPassword = () => rejectPassword(new Error('文件已加密，请先解锁 PDF 后重试。'));
+  try {
+    const pdf = await Promise.race([loader.promise, passwordError]);
+    if (pdf.numPages > 100) throw new Error('此功能每次最多处理 100 页，请先拆分文件');
+    return await fn(pdf);
+  } finally { await loader.destroy(); }
+}
+async function renderPage(page) {
+  const original = page.getViewport({ scale: 1 });
+  const scale = Math.min(2, Math.sqrt(6000000 / (original.width * original.height)), 4096 / Math.max(original.width, original.height));
+  const viewport = page.getViewport({ scale });
+  const canvas = document.createElement('canvas'); canvas.width = Math.ceil(viewport.width); canvas.height = Math.ceil(viewport.height);
+  try {
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport, background: 'white' }).promise;
+    const blob = await new Promise((resolve, reject) => canvas.toBlob(b => b ? resolve(b) : reject(new Error('图片生成失败')), 'image/png'));
+    return { bytes: new Uint8Array(await blob.arrayBuffer()), width: original.width, height: original.height };
+  } finally { canvas.width = 0; canvas.height = 0; page.cleanup(); }
+}
+function linesFromContent(content) {
+  const lines = []; let line = '', lastY = null, endX = 0;
+  for (const item of content.items) {
+    if (typeof item.str !== 'string') continue;
+    const y = item.transform[5], x = item.transform[4];
+    if (lastY !== null && Math.abs(y - lastY) > Math.max(2, Math.abs(item.transform[3]) * .35)) { if (line.trim()) lines.push(line); line = ''; }
+    if (line && x - endX > 2 && !/\s$/.test(line)) line += ' ';
+    line += item.str; lastY = y; endX = x + item.width;
+    if (item.hasEOL) { if (line.trim()) lines.push(line); line = ''; lastY = null; }
+  }
+  if (line.trim()) lines.push(line);
+  return lines;
+}
+async function extractText(pdf, task) {
+  const pages = []; let empty = 0;
+  for (let i = 1; i <= pdf.numPages; i++) {
+    status(task, `正在提取文字 ${i} / ${pdf.numPages}…`);
+    const page = await pdf.getPage(i); const lines = linesFromContent(await page.getTextContent()); page.cleanup();
+    if (!lines.length) empty++;
+    pages.push(lines);
+  }
+  if (empty === pages.length) throw new Error('未发现可提取文字，可能是扫描件。请使用 Word「保留页面外观」模式，或先进行 OCR');
+  return { pages, warning: empty ? `其中 ${empty} 页未发现文字（可能为空白页或扫描页），请核对原件。` : '' };
+}
+
+const jobs = {
+  async merge() {
+    const files = selected('mergeFiles', true); if (files.length < 2) throw new Error('请选择至少 2 个 PDF');
+    const out = await PDFDocument.create();
+    for (const f of files) { const src = await PDFDocument.load(await f.arrayBuffer()); (await out.copyPages(src, src.getPageIndices())).forEach(p => out.addPage(p)); }
+    return output(await out.save(), 'merged.pdf');
+  },
+  async split() {
+    const file = selected('splitFile'), src = await PDFDocument.load(await file.arrayBuffer()), ids = parsePages($('splitPages').value, src.getPageCount());
+    const out = await PDFDocument.create(); (await out.copyPages(src, ids)).forEach(p => out.addPage(p));
+    return output(await out.save(), fileBase(file) + '-提取.pdf');
+  },
+  async rotate(angle) {
+    const file = selected('rotateFile'), doc = await PDFDocument.load(await file.arrayBuffer());
+    doc.getPages().forEach(p => p.setRotation(degrees((p.getRotation().angle + angle) % 360)));
+    return output(await doc.save(), fileBase(file) + '-旋转' + angle + '.pdf');
+  },
+  async image() {
+    const files = selected('imageFiles', true), doc = await PDFDocument.create();
+    for (const file of files) {
+      const bytes = new Uint8Array(await file.arrayBuffer());
+      const img = bytes[0] === 137 && bytes[1] === 80 ? await doc.embedPng(bytes) : await doc.embedJpg(bytes);
+      const ratio = Math.min(595.28 / img.width, 841.89 / img.height);
+      const page = doc.addPage([img.width * ratio, img.height * ratio]);
+      page.drawImage(img, { x: 0, y: 0, width: page.getWidth(), height: page.getHeight() });
+    }
+    return output(await doc.save(), 'images.pdf');
+  },
+  async pdfImage() {
+    const file = selected('pdfImageFile');
+    return withPdf(file, 'pdfImage', async pdf => {
+      const zip = new window.JSZip(); let total = 0;
+      for (let i = 1; i <= pdf.numPages; i++) {
+        status('pdfImage', `正在生成图片 ${i} / ${pdf.numPages}…`);
+        const image = await renderPage(await pdf.getPage(i)); total += image.bytes.length; checkOutput(total);
+        zip.file(`page-${String(i).padStart(3, '0')}.png`, image.bytes);
+      }
+      return output(await zip.generateAsync({ type: 'blob' }), fileBase(file) + '-图片.zip');
+    });
+  },
+  async text() {
+    const file = selected('textFile');
+    return withPdf(file, 'text', async pdf => {
+      const { pages, warning } = await extractText(pdf, 'text');
+      return output('\uFEFF' + pages.map((p, i) => `—— 第 ${i + 1} 页 ——\n${p.length ? p.join('\n') : '[此页无可提取文字]'}`).join('\n\n'), fileBase(file) + '.txt', 'text/plain;charset=utf-8', '提取完成，请下载。' + warning);
+    });
+  },
+  async word() {
+    const file = selected('wordFile'), mode = $('wordMode').value;
+    await loadScript('https://cdn.jsdelivr.net/npm/docx@9.7.1/dist/index.iife.js');
+    return withPdf(file, 'word', async pdf => {
+      const { Document, Paragraph, TextRun, ImageRun, Packer } = window.docx;
+      let sections, warning = '';
+      if (mode === 'text') {
+        const result = await extractText(pdf, 'word'); warning = result.warning;
+        const children = [];
+        result.pages.forEach((lines, i) => {
+          (lines.length ? lines : ['[此页无可提取文字，请核对原件]']).forEach((text, j) => children.push(new Paragraph({ pageBreakBefore: i > 0 && j === 0, children: [new TextRun({ text, font: 'Microsoft YaHei', size: 24 })], spacing: { after: 100, line: 320 } })));
+        });
+        sections = [{ children }];
+      } else {
+        sections = []; let total = 0;
+        for (let i = 1; i <= pdf.numPages; i++) {
+          status('word', `正在保留页面外观 ${i} / ${pdf.numPages}…`);
+          const image = await renderPage(await pdf.getPage(i)); total += image.bytes.length; checkOutput(total);
+          // Fit Word page limits; floating image coordinates are relative to the page.
+          const scale = Math.min(1, 1400 / Math.max(image.width, image.height));
+          const w = image.width * scale, h = image.height * scale;
+          sections.push({ properties: { page: { size: { width: Math.round(w * 20), height: Math.round(h * 20) }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } } }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 20 }, children: [new ImageRun({ data: image.bytes, type: 'png', transformation: { width: w * 96 / 72, height: h * 96 / 72 }, floating: { horizontalPosition: { relative: 'page', offset: 0 }, verticalPosition: { relative: 'page', offset: 0 }, wrap: { type: 'none' }, allowOverlap: true, behindDocument: false }, altText: { title: `第 ${i} 页`, description: 'PDF 页面图片，文字不可单独编辑', name: `page-${i}` } })] })] });
+        }
+      }
+      const doc = new Document({ creator: '文档小站', title: fileBase(file), sections });
+      return output(await Packer.toBlob(doc), fileBase(file) + (mode === 'image' ? '-保留外观' : '-可编辑文字') + '.docx', undefined, '转换完成，请下载。' + warning);
+    });
+  },
+  async ppt() {
+    const file = selected('pptFile'); await loadScript('https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js');
+    return withPdf(file, 'ppt', async pdf => {
+      const ppt = new window.PptxGenJS(); ppt.author = '文档小站'; ppt.subject = 'PDF 页面图片'; ppt.title = fileBase(file);
+      const first = await pdf.getPage(1), viewport = first.getViewport({ scale: 1 }); first.cleanup();
+      const factor = 10 / Math.max(viewport.width, viewport.height), w = viewport.width * factor, h = viewport.height * factor;
+      ppt.defineLayout({ name: 'PDF_PAGE', width: w, height: h }); ppt.layout = 'PDF_PAGE';
+      let total = 0;
+      for (let i = 1; i <= pdf.numPages; i++) {
+        status('ppt', `正在生成幻灯片 ${i} / ${pdf.numPages}…`);
+        const image = await renderPage(await pdf.getPage(i)); total += image.bytes.length; checkOutput(total);
+        const data = await new Promise(resolve => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.readAsDataURL(new Blob([image.bytes], { type: 'image/png' })); });
+        const scale = Math.min(w / image.width, h / image.height), iw = image.width * scale, ih = image.height * scale;
+        const slide = ppt.addSlide(); slide.background = { color: 'FFFFFF' };
+        slide.addImage({ data, x: (w - iw) / 2, y: (h - ih) / 2, w: iw, h: ih, altText: `PDF 第 ${i} 页` });
+      }
+      return output(await ppt.write({ outputType: 'blob', compression: true }), fileBase(file) + '.pptx');
+    });
+  },
+};
+function checkOutput(bytes) { if (bytes > 100 * 1024 * 1024) throw new Error('生成图片超过 100 MB，请先拆分 PDF，减少手机内存占用'); }
+
+for (const card of document.querySelectorAll('[data-task]')) {
+  const task = card.dataset.task;
+  const download = document.createElement('button'); download.className = 'btn download'; download.textContent = '下载文件'; download.disabled = true; download.type = 'button'; download.setAttribute('aria-label', card.querySelector('h2').textContent + '：下载文件');
+  const name = document.createElement('div'); name.className = 'result-name';
+  card.append(download, name); states.set(task, { card, download, name, busy: false, url: null });
+  $(task + 'Status').setAttribute('role', 'status'); $(task + 'Status').setAttribute('aria-live', 'polite');
+  download.addEventListener('click', () => {
+    const s = states.get(task); if (!s.url) return;
+    const anchor = document.createElement('a'); anchor.href = s.url; anchor.download = s.filename; document.body.appendChild(anchor); anchor.click(); anchor.remove();
+    status(task, '已发起下载，可再次点击下载按钮。');
+  });
+  for (const input of card.querySelectorAll('input, select')) {
+    if (!input.getAttribute('aria-label') && !input.labels?.length) input.setAttribute('aria-label', input.placeholder || card.querySelector('h2').textContent + '：选择文件');
+    input.addEventListener(input.type === 'text' ? 'input' : 'change', () => { clearResult(task); status(task, ''); });
+  }
+}
+$('wordMode').addEventListener('change', () => {
+  $('wordHint').textContent = $('wordMode').value === 'text' ? '提取文字并按行排版，不保留原图片、表格结构及公式格式；扫描件需先做 OCR。' : '每页作为图片放入 Word，保留页面外观；文字、表格和公式无法单独编辑。';
+});
+for (const button of document.querySelectorAll('[data-run]')) button.addEventListener('click', () => run(button.dataset.run, () => jobs[button.dataset.run](Number(button.dataset.angle))));
+window.addEventListener('pagehide', () => { for (const s of states.values()) if (s.url) URL.revokeObjectURL(s.url); });
+window.addEventListener('pageshow', event => { if (event.persisted) for (const task of states.keys()) { clearResult(task); status(task, '请重新转换后下载。'); } });
+
+</script>
+</body>
+</html>

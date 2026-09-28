@@ -1,5 +1,6 @@
 import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.min.mjs';
 import { analyzePage, buildEditableDocx, cropRegions, extractTextItems, buildLines, repeatedMargins } from './word-layout.js';
+import { detectGraphicRegions } from './word-graphics.js';
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs';
 const $ = id => document.getElementById(id);
 const { PDFDocument, degrees } = window.PDFLib;
@@ -185,37 +186,47 @@ const jobs = {
         return output(await Packer.toBlob(doc), fileBase(file) + '-原版布局.docx', undefined, '转换完成，请下载。');
       }
       status('word', '正在读取 PDF…');
+      const started = performance.now();
       const raw = [];
       for (const [index, id] of ids.entries()) {
         status('word', `正在分析第 ${index + 1} / ${ids.length} 页…`);
         const page = await pdf.getPage(id + 1), viewport = page.getViewport({ scale: 1 });
         const content = await page.getTextContent();
-        raw.push({ number: id + 1, width: viewport.width, height: viewport.height, content,
-          lines: buildLines(extractTextItems(content, viewport.height)) });
+        const lines = buildLines(extractTextItems(content, viewport.height));
+        const graphicInfo = mode === 'smart' ? detectGraphicRegions(await page.getOperatorList(), pdfjs.OPS,
+          viewport.width, viewport.height, lines) : {};
+        raw.push({ number: id + 1, width: viewport.width, height: viewport.height, content, lines, graphicInfo });
         page.cleanup();
       }
-      const repeated = repeatedMargins(raw), models = raw.map(p => analyzePage(p.number, p.width, p.height, p.content, mode, repeated));
+      const repeated = repeatedMargins(raw), models = [];
+      for(const p of raw) models.push(analyzePage(p.number,p.width,p.height,p.content,mode,repeated,
+        p.graphicInfo,models.at(-1)?.toc.isTOC && p.number===models.at(-1).number+1));
       if (models.every(p => p.lines.length === 0)) throw new Error('未发现可提取文字，可能是扫描件。请使用「原版布局」模式，或先进行 OCR');
       status('word', '正在重建段落和分析标题…');
       let total = 0;
       for (const [index, model] of models.entries()) {
-        if (!model.regions.length) continue;
+        const toCrop = model.regions.filter(r => r.type !== 'table' || r.table?.confidence !== 'high');
+        if (!toCrop.length) continue;
         status('word', `正在处理第 ${index + 1} / ${models.length} 页图片、表格及公式…`);
-        const page = await pdf.getPage(ids[index] + 1), images = await cropRegions(page, model.regions);
-        for (const [i, r] of model.regions.entries()) {
-          const block = model.blocks.find(b => b.kind === 'region' && b.region === r);
-          block.image = images[i]; total += images[i]?.length || 0; checkOutput(total);
+        const page = await pdf.getPage(ids[index] + 1), images = await cropRegions(page, toCrop);
+        for (const [i, r] of toCrop.entries()) {
+          r.image = images[i]; total += images[i]?.length || 0; checkOutput(total);
         }
       }
       const { doc, stats } = buildEditableDocx(models, window.docx, mode);
+      const analysisMs = Math.round(performance.now() - started);
       const shortRatio = stats.paragraphs ? stats.shortParagraphs / stats.paragraphs : 0;
-      const qa = { pdfPages: pdf.numPages, selectedPages: ids.length, ...stats, shortRatio: +shortRatio.toFixed(3) };
-      console.info('PDF → DOCX 质量统计', JSON.stringify(qa));
-      if (shortRatio > .25 || stats.paragraphs > ids.length * 40) console.warn('PDF → DOCX 段落可能过碎，请核查原件', qa);
+      const qa = { pdfPages: pdf.numPages, selectedPages: ids.length, ...stats, shortRatio: +shortRatio.toFixed(3), analysisMs };
+      if (stats.headings / ids.length > 3 || shortRatio > .2 || stats.singleCharacterParagraphs > 10 ||
+        (stats.tables > 2 && !stats.editableTables) || (ids.length === 32 && stats.paragraphs > 1200))
+        console.warn('PDF → DOCX 版式结构需要核查', qa);
       status('word', '正在生成 Word…');
       const name = fileBase(file) + (mode === 'smart' ? '-智能排版' : '-易于编辑') + '.docx';
-      return output(await Packer.toBlob(doc), name, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        '转换完成，请下载。正文可编辑；表格、公式等复杂区域会以图片保留，请核对原件。' + warning);
+      const blob = await Packer.toBlob(doc);
+      qa.docxMs = Math.round(performance.now() - started - analysisMs);
+      console.info('PDF → DOCX 质量统计', JSON.stringify(qa));
+      return output(blob, name, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '转换完成，请下载。正文与规则表格可编辑；复杂表格、公式等区域按原貌保留，请核对原件。' + warning);
     });
   },
   async ppt() {

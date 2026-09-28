@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>文档小站 V1.4</title>
+  <title>文档小站 V1.4.1</title>
   <meta name="description" content="浏览器本地完成 PDF 转 Word、PPTX、TXT、JPG/PNG，以及 PDF 合并、拆分、旋转和图片转 PDF。" />
   <style>
     :root{--bg:#0b1020;--panel:#121a2d;--card:#18233a;--text:#edf2ff;--muted:#aab6d4;--accent:#7c9cff;--accent2:#9ce8d9;--danger:#ff8f8f}
@@ -15,18 +15,18 @@
 <body>
 <div class="wrap">
   <section class="hero">
-    <div class="badge">V1.4 · 浏览器本地处理</div>
+    <div class="badge">V1.4.1 · 浏览器本地处理</div>
     <h1>文档小站</h1>
     <p><span class="privacy">文件不上传服务器。</span> PDF 转 Word / PPTX / TXT / JPG / PNG，以及合并、拆分、旋转、图片转 PDF，直接在浏览器里完成。转换好后点独立按钮下载。</p>
   </section>
 
   <main class="grid">
     <section class="card" data-task="word">
-      <h2>PDF → Word</h2><p>生成 DOCX，按需要选择文字编辑或保留外观。</p>
+      <h2>PDF → Word</h2><p>生成 DOCX，选择智能排版、易于编辑或原版布局。</p>
       <div class="drop"><input id="wordFile" aria-label="选择要转 Word 的 PDF" type="file" accept=".pdf,application/pdf"></div>
-      <div class="row"><label for="wordMode">转换模式</label><select id="wordMode"><option value="text">可编辑文字</option><option value="image">保留页面外观（图片）</option></select></div>
+      <div class="row"><label for="wordMode">转换模式</label><select id="wordMode"><option value="smart">智能排版（推荐）</option><option value="edit">易于编辑</option><option value="image">原版布局（页面图片）</option></select></div>
       <label class="field" for="wordPages">页码范围（留空为全部）<input class="pages" id="wordPages" type="text" inputmode="text" placeholder="例如 1,3,5-8"></label>
-      <p class="hint" id="wordHint">提取文字并按行排版，不保留原图片、表格结构及公式格式；扫描件需先做 OCR。</p>
+      <p class="hint" id="wordHint">识别自然段和标题，保留主要图、表与复杂公式的外观；正文可编辑。复杂页面请对照原 PDF 核查。</p>
       <div class="row"><button class="btn" data-run="word">开始转换</button></div>
       <div class="status" id="wordStatus" role="status" aria-live="polite"></div>
     </section>

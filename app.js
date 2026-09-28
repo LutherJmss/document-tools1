@@ -1,4 +1,5 @@
 import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.min.mjs';
+import { analyzePage, buildEditableDocx, cropRegions, extractTextItems, buildLines, repeatedMargins } from './word-layout.js';
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs';
 const $ = id => document.getElementById(id);
 const { PDFDocument, degrees } = window.PDFLib;
@@ -169,14 +170,7 @@ const jobs = {
       const ids = selectedPages('word', pdf.numPages);
       const { Document, Paragraph, TextRun, ImageRun, Packer } = window.docx;
       let sections, warning = '';
-      if (mode === 'text') {
-        const result = await extractText(pdf, 'word', ids); warning = result.warning;
-        const children = [];
-        result.pages.forEach((entry, i) => {
-          (entry.lines.length ? entry.lines : ['[此页无可提取文字，请核对原件]']).forEach((text, j) => children.push(new Paragraph({ pageBreakBefore: i > 0 && j === 0, children: [new TextRun({ text, font: 'Microsoft YaHei', size: 24 })], spacing: { after: 100, line: 320 } })));
-        });
-        sections = [{ children }];
-      } else {
+      if (mode === 'image') {
         sections = []; let total = 0;
         for (const [index, id] of ids.entries()) {
           status('word', `正在保留第 ${id + 1} 页（${index + 1} / ${ids.length}）…`);
@@ -186,9 +180,42 @@ const jobs = {
           const w = image.width * scale, h = image.height * scale;
           sections.push({ properties: { page: { size: { width: Math.round(w * 20), height: Math.round(h * 20) }, margin: { top: 0, bottom: 0, left: 0, right: 0, header: 0, footer: 0 } } }, children: [new Paragraph({ spacing: { before: 0, after: 0, line: 20 }, children: [new ImageRun({ data: image.bytes, type: 'png', transformation: { width: w * 96 / 72, height: h * 96 / 72 }, floating: { horizontalPosition: { relative: 'page', offset: 0 }, verticalPosition: { relative: 'page', offset: 0 }, wrap: { type: 'none' }, allowOverlap: true, behindDocument: false }, altText: { title: `第 ${id + 1} 页`, description: 'PDF 页面图片，文字不可单独编辑', name: `page-${id + 1}` } })] })] });
         }
+        const doc = new Document({ creator: '文档小站', title: fileBase(file), sections });
+        status('word', '正在生成 Word…');
+        return output(await Packer.toBlob(doc), fileBase(file) + '-原版布局.docx', undefined, '转换完成，请下载。');
       }
-      const doc = new Document({ creator: '文档小站', title: fileBase(file), sections });
-      return output(await Packer.toBlob(doc), fileBase(file) + (mode === 'image' ? '-保留外观' : '-可编辑文字') + '.docx', undefined, '转换完成，请下载。' + warning);
+      status('word', '正在读取 PDF…');
+      const raw = [];
+      for (const [index, id] of ids.entries()) {
+        status('word', `正在分析第 ${index + 1} / ${ids.length} 页…`);
+        const page = await pdf.getPage(id + 1), viewport = page.getViewport({ scale: 1 });
+        const content = await page.getTextContent();
+        raw.push({ number: id + 1, width: viewport.width, height: viewport.height, content,
+          lines: buildLines(extractTextItems(content, viewport.height)) });
+        page.cleanup();
+      }
+      const repeated = repeatedMargins(raw), models = raw.map(p => analyzePage(p.number, p.width, p.height, p.content, mode, repeated));
+      if (models.every(p => p.lines.length === 0)) throw new Error('未发现可提取文字，可能是扫描件。请使用「原版布局」模式，或先进行 OCR');
+      status('word', '正在重建段落和分析标题…');
+      let total = 0;
+      for (const [index, model] of models.entries()) {
+        if (!model.regions.length) continue;
+        status('word', `正在处理第 ${index + 1} / ${models.length} 页图片、表格及公式…`);
+        const page = await pdf.getPage(ids[index] + 1), images = await cropRegions(page, model.regions);
+        for (const [i, r] of model.regions.entries()) {
+          const block = model.blocks.find(b => b.kind === 'region' && b.region === r);
+          block.image = images[i]; total += images[i]?.length || 0; checkOutput(total);
+        }
+      }
+      const { doc, stats } = buildEditableDocx(models, window.docx, mode);
+      const shortRatio = stats.paragraphs ? stats.shortParagraphs / stats.paragraphs : 0;
+      const qa = { pdfPages: pdf.numPages, selectedPages: ids.length, ...stats, shortRatio: +shortRatio.toFixed(3) };
+      console.info('PDF → DOCX 质量统计', JSON.stringify(qa));
+      if (shortRatio > .25 || stats.paragraphs > ids.length * 40) console.warn('PDF → DOCX 段落可能过碎，请核查原件', qa);
+      status('word', '正在生成 Word…');
+      const name = fileBase(file) + (mode === 'smart' ? '-智能排版' : '-易于编辑') + '.docx';
+      return output(await Packer.toBlob(doc), name, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '转换完成，请下载。正文可编辑；表格、公式等复杂区域会以图片保留，请核对原件。' + warning);
     });
   },
   async ppt() {
@@ -231,7 +258,11 @@ for (const card of document.querySelectorAll('[data-task]')) {
   }
 }
 $('wordMode').addEventListener('change', () => {
-  $('wordHint').textContent = $('wordMode').value === 'text' ? '提取文字并按行排版，不保留原图片、表格结构及公式格式；扫描件需先做 OCR。' : '每页作为图片放入 Word，保留页面外观；文字、表格和公式无法单独编辑。';
+  $('wordHint').textContent = ({
+    smart: '识别自然段和标题，保留主要图、表与复杂公式的外观；正文可编辑。复杂页面请对照原 PDF 核查。',
+    edit: '优先自然段、标题与重排编辑；图片、表格和复杂公式可能无法完整保留。',
+    image: '每页作为图片放入 Word，最大程度保持页面外观；文字、表格和公式无法单独编辑。',
+  })[$('wordMode').value];
 });
 for (const button of document.querySelectorAll('[data-run]')) button.addEventListener('click', () => run(button.dataset.run, () => jobs[button.dataset.run](Number(button.dataset.angle))));
 window.addEventListener('pagehide', () => { for (const s of states.values()) if (s.url) URL.revokeObjectURL(s.url); });

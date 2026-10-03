@@ -1,5 +1,9 @@
+import {createImageOptimizer} from './word-image.js';
 import * as pdfjs from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.min.mjs';
 import { analyzePage, buildEditableDocx, cropRegions, extractTextItems, buildLines, repeatedMargins } from './word-layout.js';
+import { detectGraphicRegions } from './word-graphics.js';
+import {prepareQuality,preserveRasterGaps,repairQuality} from './word-quality.js';
+import {preloadLocalOCR} from './local-ocr.js';
 pdfjs.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@5.6.205/build/pdf.worker.min.mjs';
 const $ = id => document.getElementById(id);
 const { PDFDocument, degrees } = window.PDFLib;
@@ -23,6 +27,7 @@ function clearResult(task) {
   const s = states.get(task);
   if (s.url) URL.revokeObjectURL(s.url);
   s.url = null; s.download.disabled = true; s.name.textContent = '';
+  if(task==='word'){$('qualityDownload').disabled=true;window.documentQualityReport=null;}
 }
 function fileBase(file) { return file.name.replace(/\.[^.]+$/, '').replace(/[\\/:*?"<>|\u0000-\u001f]/g, '_').slice(0, 100) || 'document'; }
 function selected(id, multiple = false) {
@@ -49,7 +54,8 @@ async function run(task, job) {
   } catch (e) {
     const message = /password|encrypted/i.test(e.message) ? '文件已加密，请先解锁 PDF 后重试。' : /Invalid PDF|PDF structure|No PDF header/i.test(e.message) ? 'PDF 文件已损坏或格式无效，请重新选择文件。' : (e.message || '文件无法处理，请检查格式后重试');
     status(task, '未完成：' + message, true);
-  } finally { s.busy = false; controls.forEach(node => node.disabled = false); }
+  } finally { s.busy = false; controls.forEach(node => node.disabled = false);
+    if(task==='word'){$('wordReading').disabled=$('wordMode').value==='image';$('wordOCR').disabled=$('wordMode').value!=='smart';$('qualityDownload').disabled=!window.documentQualityReport;} }
 }
 function output(bytes, name, type = 'application/pdf', message) { return { blob: bytes instanceof Blob ? bytes : new Blob([bytes], { type }), name, message }; }
 
@@ -185,37 +191,55 @@ const jobs = {
         return output(await Packer.toBlob(doc), fileBase(file) + '-原版布局.docx', undefined, '转换完成，请下载。');
       }
       status('word', '正在读取 PDF…');
+      const started = performance.now();
       const raw = [];
       for (const [index, id] of ids.entries()) {
         status('word', `正在分析第 ${index + 1} / ${ids.length} 页…`);
         const page = await pdf.getPage(id + 1), viewport = page.getViewport({ scale: 1 });
         const content = await page.getTextContent();
-        raw.push({ number: id + 1, width: viewport.width, height: viewport.height, content,
-          lines: buildLines(extractTextItems(content, viewport.height)) });
+        const items = extractTextItems(content, viewport.height), lines = buildLines(items);
+        const graphicInfo = mode === 'smart' ? detectGraphicRegions(await page.getOperatorList(), pdfjs.OPS,
+          viewport.width, viewport.height, lines) : {};
+        raw.push({ number: id + 1, width: viewport.width, height: viewport.height, content, items, lines, graphicInfo });
         page.cleanup();
       }
-      const repeated = repeatedMargins(raw), models = raw.map(p => analyzePage(p.number, p.width, p.height, p.content, mode, repeated));
-      if (models.every(p => p.lines.length === 0)) throw new Error('未发现可提取文字，可能是扫描件。请使用「原版布局」模式，或先进行 OCR');
+      const repeated = repeatedMargins(raw), models = [];
+      for(const p of raw) models.push(analyzePage(p.number,p.width,p.height,p.content,mode,repeated,
+        p.graphicInfo,models.at(-1)?.toc.isTOC && p.number===models.at(-1).number+1,
+        models.at(-1)?.exercise?.continues && p.number===models.at(-1).number+1,p));
+      if (models.every(p => p.lines.length === 0)&&mode!=='smart') throw new Error('未发现可提取文字，可能是扫描件。请使用「原版布局」模式，或先进行 OCR');
       status('word', '正在重建段落和分析标题…');
-      let total = 0;
-      for (const [index, model] of models.entries()) {
-        if (!model.regions.length) continue;
-        status('word', `正在处理第 ${index + 1} / ${models.length} 页图片、表格及公式…`);
-        const page = await pdf.getPage(ids[index] + 1), images = await cropRegions(page, model.regions);
-        for (const [i, r] of model.regions.entries()) {
-          const block = model.blocks.find(b => b.kind === 'region' && b.region === r);
-          block.image = images[i]; total += images[i]?.length || 0; checkOutput(total);
+      const qualityReport=mode==='smart'?prepareQuality(models,raw,{ocr:$('wordOCR').checked}):null;
+      const needOCR=qualityReport?.regions.some(r=>r.ocrEnabled)||models.some(p=>p.blocks.some(b=>b.formulaOCRRegion));
+      const preloading=needOCR?preloadLocalOCR().catch(()=>null):Promise.resolve(null);
+      let total = 0;const optimizer=createImageOptimizer();
+      try {
+        for (const [index, model] of models.entries()) {
+          const toCrop = model.regions.filter(r => r.type !== 'table' || r.table?.confidence !== 'high');
+          if (!toCrop.length) continue;
+          status('word', `正在处理第 ${index + 1} / ${models.length} 页图片、表格及公式…`);
+          const page = await pdf.getPage(ids[index] + 1), images = await cropRegions(page, toCrop,optimizer);
+          for (const [i, r] of toCrop.entries()) {
+            r.image = images[i]; total += images[i]?.length || 0; checkOutput(total);
+          }
         }
-      }
-      const { doc, stats } = buildEditableDocx(models, window.docx, mode);
+        if(qualityReport){await preserveRasterGaps(models,qualityReport,optimizer);await repairQuality(models,qualityReport);}
+      } finally {optimizer.dispose()}
+      const { doc, stats } = buildEditableDocx(models, window.docx, mode,$('wordReading').value);
+      const analysisMs = Math.round(performance.now() - started);
       const shortRatio = stats.paragraphs ? stats.shortParagraphs / stats.paragraphs : 0;
-      const qa = { pdfPages: pdf.numPages, selectedPages: ids.length, ...stats, shortRatio: +shortRatio.toFixed(3) };
-      console.info('PDF → DOCX 质量统计', JSON.stringify(qa));
-      if (shortRatio > .25 || stats.paragraphs > ids.length * 40) console.warn('PDF → DOCX 段落可能过碎，请核查原件', qa);
+      const qa = { pdfPages: pdf.numPages, selectedPages: ids.length, ...stats, ...optimizer.stats,...(qualityReport?.summary||{}), shortRatio: +shortRatio.toFixed(3), analysisMs };
+      if (stats.headings / ids.length > 3 || shortRatio > .2 || stats.singleCharacterParagraphs > 10 ||
+        (stats.tables > 2 && !stats.editableTables) || (ids.length === 32 && stats.paragraphs > 1200))
+        console.warn('PDF → DOCX 版式结构需要核查', qa);
       status('word', '正在生成 Word…');
       const name = fileBase(file) + (mode === 'smart' ? '-智能排版' : '-易于编辑') + '.docx';
-      return output(await Packer.toBlob(doc), name, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        '转换完成，请下载。正文可编辑；表格、公式等复杂区域会以图片保留，请核对原件。' + warning);
+      const blob = await Packer.toBlob(doc);
+      if(qualityReport){window.documentQualityReport=qualityReport;$('qualityDownload').disabled=false;}
+      qa.docxMs = Math.round(performance.now() - started - analysisMs);
+      console.info('PDF → DOCX 质量统计', JSON.stringify(qa));
+      return output(blob, name, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        '转换完成，请下载。正文与规则表格可编辑；复杂表格、公式等区域按原貌保留，请核对原件。' + warning);
     });
   },
   async ppt() {
@@ -258,11 +282,16 @@ for (const card of document.querySelectorAll('[data-task]')) {
   }
 }
 $('wordMode').addEventListener('change', () => {
+  $('wordReading').disabled=$('wordMode').value==='image';$('wordOCR').disabled=$('wordMode').value!=='smart';
   $('wordHint').textContent = ({
     smart: '识别自然段和标题，保留主要图、表与复杂公式的外观；正文可编辑。复杂页面请对照原 PDF 核查。',
     edit: '优先自然段、标题与重排编辑；图片、表格和复杂公式可能无法完整保留。',
     image: '每页作为图片放入 Word，最大程度保持页面外观；文字、表格和公式无法单独编辑。',
   })[$('wordMode').value];
+});
+$('qualityDownload').addEventListener('click',()=>{if(!window.documentQualityReport)return;
+ const url=URL.createObjectURL(new Blob([JSON.stringify(window.documentQualityReport,null,2)],{type:'application/json'}));
+ const a=document.createElement('a');a.href=url;a.download='text_quality_report.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);
 });
 for (const button of document.querySelectorAll('[data-run]')) button.addEventListener('click', () => run(button.dataset.run, () => jobs[button.dataset.run](Number(button.dataset.angle))));
 window.addEventListener('pagehide', () => { for (const s of states.values()) if (s.url) URL.revokeObjectURL(s.url); });

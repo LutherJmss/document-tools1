@@ -1,0 +1,34 @@
+$ git status --porcelain=v1 --branch
+exit=0
+## v1.4.3-quality-fix
+
+$ git log -6 --format=%H %aI %s
+exit=0
+94b6b0b5f2af861fd4649e990d53ec55a7e43aec 2026-10-01T09:40:45+01:00 Document V1.4.3 RC1 validation and remaining acceptance limits
+646b448bfdf3ebdcd90546b4feed4f398f613c34 2026-10-01T13:48:03+08:00 Preserve chapter page breaks and avoid duplicate simple-table captions
+57bef480647b92d4d1fa988bcd48bb87f294610c 2026-10-01T13:42:07+08:00 Verify formula and OCR fallbacks and preserve complete simple tables
+810881ab24c40c936c2a2078e2ac61dd178a6e96 2026-10-01T12:37:52+09:00 Document bundled local OCR model provenance
+78d1b5f436882eb82447d14a355031e60af71879 2026-10-01T12:37:36+09:00 Add conservative text quality and formula safeguards on RC2
+ae2b77a831cf43dae6463d0b2b8c6b14d058e376 2026-10-01T02:12:19+01:00 Optimize RC2 images losslessly and preserve RC1 layout safeguards
+
+$ git branch -vv
+exit=0
++ v1.4.2-layout-refinement ae2b77a (/workspace/scratch/e7e899a54fc9/document-tools-rc2) Optimize RC2 images losslessly and preserve RC1 layout safeguards
+* v1.4.3-quality-fix       94b6b0b Document V1.4.3 RC1 validation and remaining acceptance limits
+
+$ git remote
+exit=0
+
+$ git rev-parse --is-shallow-repository
+exit=0
+true
+
+$ git diff --check
+exit=0
+
+$ git diff --check ae2b77a HEAD
+exit=2
+ocr-data/LICENSE-Apache-2.0.txt:202: new blank line at EOF.
+
+$ git fsck --connectivity-only
+exit=0

@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import {detectHeading,analyzePage,mapPdfFont,buildEditableDocx} from '../word-layout.js';
+import {detectExerciseRegion,buildQuestionBlocks} from '../word-exercise.js';
+const results=[];const check=(name,fn)=>{fn();results.push(name)};
+const line=(text,y=100,x=65,width=450)=>({text,y,x,width,right:x+width,fontSize:10,items:[{text,x,y,width,height:10}]});
+check('decimal headings take precedence over numbered lists',()=>{assert.equal(detectHeading(line('1.1 概述'),10,{width:595}),2);assert.equal(detectHeading(line('1.1.1 数字信号和数字电路'),10,{width:595}),3);assert.equal(detectHeading(line('*1.3 二进制数的算术运算'),10,{width:595}),2);assert.equal(detectHeading(line('1.简述计算方法。'),10,{width:595}),0)});
+check('TOC remains outside Heading styles',()=>assert.equal(detectHeading(line('1.1 概述 1'),10,{width:595,toc:true}),0));
+const bounds={top:50,bottom:750,left:30,right:565};
+for(const [name,rows]of [['horizontal',['A.甲 B.乙 C.丙 D.丁']],['vertical',['A.甲','B.乙','C.丙','D.丁']],['two rows',['A.甲 B.乙','C.丙 D.丁']],['A/C then B/D',['A.甲 C.丙','B.乙 D.丁']]])check(`options ${name}`,()=>{const q=buildQuestionBlocks([line('1.请选择正确答案()'),...rows.map((s,i)=>line(s,120+i*18))],bounds,1);assert.equal(q.stats.questionsDetected,1);assert.equal(q.stats.optionsDetected,4);assert.equal(q.stats.exerciseFallbacks,0);assert.deepEqual(q.blocks.filter(b=>b.type==='option').map(b=>b.text[0]),['A','B','C','D'])});
+check('uncertain C and parentheses fall back only within the question',()=>{const q=buildQuestionBlocks([line('1.判断此命题('),line('C',107,550,7),line('2.下一道完整题()',130)],bounds,1);assert.equal(q.stats.exerciseFallbacks,1);assert(q.questions[0].region.bottom<130);assert.equal(q.questions[1].confidence,'high');assert.equal(q.stats.singleCharacterFragments,0)});
+check('fill blanks retain source region',()=>{const q=buildQuestionBlocks([line('一、填空题'),line('1.二进制数以为基数。',130)],bounds,1);assert.equal(q.stats.exerciseFallbacks,1)});
+check('missing choice answer slot retains source question image',()=>{const q=buildQuestionBlocks([line('1.每个变量的取值为0'),line('A.0和1 B.0到7 C.0到10 D.0到F',125),line('2.下一道完整题()',150)],bounds,1);assert.equal(q.stats.exerciseFallbacks,1);assert.equal(q.questions[0].reason,'missing-choice-placeholder');assert.equal(q.questions[0].region.right,bounds.right+15);assert(q.questions[0].region.bottom<150);assert.equal(q.questions[1].confidence,'high')});
+check('orphan metrics measure emitted fragments',()=>{const q=buildQuestionBlocks([line('C.失去题干'),line('(',120)],bounds,1);assert.equal(q.stats.orphanOptions,1);assert.equal(q.stats.orphanParentheses,1);assert.equal(q.stats.singleCharacterFragments,1)});
+check('exercise stops before next body section',()=>{const r=detectExerciseRegion([line('思考题'),line('1.简述方法',125),{...line('1.2 数制和码制',160),fontSize:14}],595,842);assert.equal(r.regions.length,1);assert(r.regions[0].bottom<160);assert(!r.continues)});
+check('font mapping preserves source families',()=>{for(const [f,t,out]of [['ABCDEF+TimesNewRoman','123','Times New Roman'],['SimSun','中文','SimSun'],['SimHei','中文','SimHei'],['Courier','123','Courier New'],['CambriaMath','x','Cambria Math']])assert.equal(mapPdfFont(f,t),out)});
+check('numbered questions above 20 and decimal continuation',()=>{const q=buildQuestionBlocks([line('21.题干'),line('23.75为数值',120),line('22.下一题',140)],bounds,1);assert.equal(q.stats.questionsDetected,2);assert(q.blocks.some(b=>b.text?.includes('23.75')))});
+// Ordinary two-column reading remains left column first.
+const items=[];for(let i=0;i<18;i++)for(const x of [50,330])items.push({str:`${x===50?'左栏':'右栏'}正文第${i}行`,transform:[10,0,0,10,x,842-100-i*25],width:180,height:10,fontName:'Times'});
+const model=analyzePage(1,595,842,{items,styles:{}},'smart');
+check('ordinary two-column reading order',()=>{assert.equal(model.columnInfo.count,2);const all=model.blocks.filter(b=>b.kind==='text').map(b=>b.text).join('');assert(all.indexOf('左栏正文第17行')<all.indexOf('右栏正文第0行'))});
+console.log(JSON.stringify({passed:results.length,results},null,2));

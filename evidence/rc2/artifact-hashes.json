@@ -1,0 +1,22 @@
+{
+  "upload/数字电子技术基础(第4版) 第一章(3).pdf": {
+    "bytes": 6535691,
+    "sha256": "2368e913d823cce2d0c45d69b35379c896c0574f9cf631e0c5efc3c537a5f26b"
+  },
+  "upload/数字电子技术基础-智能排版-V1.4.2-RC1(2).docx": {
+    "bytes": 3333551,
+    "sha256": "ad04dee8acd0bd333309845c0c8b561d494e950203005090eca79b4ed8d24945"
+  },
+  "upload/数字电子技术基础-智能排版-V1.4.2-RC1(2).pdf": {
+    "bytes": 2562930,
+    "sha256": "c5096b86889508464cc34ef8a0f3c4c526460134d347bb6da81262c17a07d1f6"
+  },
+  "deliverables/rc2/数字电子技术基础-V1.4.2-RC2.docx": {
+    "bytes": 1584211,
+    "sha256": "c442e237acb108a08c631a9e67b68b41f375018228552916f056af00d35d3b56"
+  },
+  "deliverables/rc2/数字电子技术基础-V1.4.2-RC2.pdf": {
+    "bytes": 2482530,
+    "sha256": "5508c4eefd52f083468b86ccf007f3af80a06b84c71e238f33eb1119c743492d"
+  }
+}

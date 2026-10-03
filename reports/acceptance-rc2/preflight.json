@@ -1,0 +1,321 @@
+{
+  "reviewedCommit": "94b6b0b5f2af861fd4649e990d53ec55a7e43aec",
+  "statusCleanBeforeAcceptanceDocs": true,
+  "gitChecks": [
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain=v1",
+        "--branch"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "log",
+        "-6",
+        "--format=%H %aI %s"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "branch",
+        "-vv"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "remote"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--is-shallow-repository"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exitCode": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check",
+        "ae2b77a",
+        "HEAD"
+      ],
+      "exitCode": 2
+    },
+    {
+      "command": [
+        "git",
+        "fsck",
+        "--connectivity-only"
+      ],
+      "exitCode": 0
+    }
+  ],
+  "remoteConfigured": false,
+  "upstreamConfigured": false,
+  "localMainAvailable": false,
+  "shallowRepository": true,
+  "gitHubRemoteCI": "not_verified_no_remote",
+  "artifacts": [
+    {
+      "file": "COMMIT.txt",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.2-RC2_vs_V1.4.3.md",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.3-RC1源代码.zip",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.3-测试日志.txt",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.3-验证资料.zip",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.3测试报告.md",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "V1.4.3视觉检查报告.md",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "text_quality_report.json",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "数字电子技术基础-V1.4.3-手机阅读.docx",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "数字电子技术基础-V1.4.3-手机阅读.pdf",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "数字电子技术基础-V1.4.3.docx",
+      "sizeMatch": true,
+      "sha256Match": true
+    },
+    {
+      "file": "数字电子技术基础-V1.4.3.pdf",
+      "sizeMatch": true,
+      "sha256Match": true
+    }
+  ],
+  "sourceArchiveMatchesReviewedCommit": true,
+  "verificationZipCRCValid": true,
+  "verificationZipMissingRequiredResults": [],
+  "existingRegressionSourceUnchanged": true,
+  "existingTrackedTestsUnchanged": {
+    "tests/rc1-structure.test.mjs": true,
+    "tests/rc2-question.test.mjs": true
+  },
+  "testLogs": {
+    "regression": {
+      "file": "qa/v143/regression.json",
+      "bytes": 624,
+      "sha256": "69645d48889be048751a43d9b78666ccd3275de66b4db25a618f0bc89e749a86",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 25,
+        "errors": [],
+        "downloads": 14
+      }
+    },
+    "structure-tests": {
+      "file": "qa/v143/structure-tests.json",
+      "bytes": 920,
+      "sha256": "02b0aad44350d92b30f476185aca1eaf818d10698bd16477c26df71e22e4a347",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 20
+      }
+    },
+    "image-tests": {
+      "file": "qa/v143/image-tests.json",
+      "bytes": 1682,
+      "sha256": "23b7c8d79bbb07c98e7570b1889e49c25e8345203bb92315f5258bce6bf1a0c1",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 27
+      }
+    },
+    "formula-tests": {
+      "file": "qa/v143/formula-tests.json",
+      "bytes": 133,
+      "sha256": "62e2448ab29fdfcf87eff5b357cd2e4a6339019a6eb9252284dc400b7a6a3207",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "cases": 36,
+        "passed": 36,
+        "restored": 24,
+        "fallback": 12
+      }
+    },
+    "text-tests": {
+      "file": "qa/v143/text-tests.json",
+      "bytes": 58,
+      "sha256": "4948d25bc9a2e9492e4b245df84aa45974012fc27aa67ae298e2536d2ebc76b6",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "cases": 21,
+        "passed": 21,
+        "selectionChecks": 2
+      }
+    },
+    "table-tests": {
+      "file": "qa/v143/table-tests.json",
+      "bytes": 18,
+      "sha256": "4bab381b3791ca2e0f1f384d111d11ef26169f2a70c290999c3254b022eb902c",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 4
+      }
+    },
+    "fallback-tests": {
+      "file": "qa/v143/fallback-tests.json",
+      "bytes": 171,
+      "sha256": "138eda87f05f5a7e65093fb840899fb1e9e46747c6bf12c9b82331ea5c3165c7",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 3
+      }
+    },
+    "portable-structure": {
+      "file": "qa/v143/portable-structure.json",
+      "bytes": 658,
+      "sha256": "0d1eba7db2b0db24050ee5e7c924254d89f8c9bff605c26b672df27cf659e18a",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 14
+      }
+    },
+    "rc2-questions": {
+      "file": "qa/v143/rc2-questions.json",
+      "bytes": 468,
+      "sha256": "b5bb99c0de9c7cce36f8947bd1d6749ab2abf8bac18f78a347e2d7901d2f7632",
+      "parsed": true,
+      "inConsolidatedLog": true,
+      "summary": {
+        "passed": 8
+      }
+    },
+    "artifact-audit": {
+      "file": "qa/v143/artifact-audit.json",
+      "bytes": 446,
+      "sha256": "c97979676f98f4ba4d0131837f48210de5c0e3dbbefce76b6757b53130b01105",
+      "parsed": true,
+      "inConsolidatedLog": true
+    },
+    "mobile-tests": {
+      "file": "qa/v143/mobile-tests.json",
+      "bytes": 395,
+      "sha256": "efc24bcc1120aec86c00feffe512c27ec98112df8c0063f9a75191104f3fccbe",
+      "parsed": true,
+      "inConsolidatedLog": true
+    },
+    "benchmark": {
+      "file": "qa/v143/benchmark.json",
+      "bytes": 40534,
+      "sha256": "af3b98acc23f8133878d512fb58025ebeb7ab998db8499a80b9ab6f01c1a47d6",
+      "parsed": true,
+      "inConsolidatedLog": true
+    },
+    "visual-audit": {
+      "file": "qa/v143/visual-audit.json",
+      "bytes": 584,
+      "sha256": "af99d70f10ef07f234e56763fdb22131bd3558ec4646feff6dd85f1cab6103a9",
+      "parsed": true,
+      "inConsolidatedLog": true
+    },
+    "text_quality_report": {
+      "file": "qa/v143/text_quality_report.json",
+      "bytes": 13831,
+      "sha256": "7bb2f7ec9db60981b29e89d2eb9c5be8814265e14ff97a41f8674962733945a5",
+      "parsed": true,
+      "inConsolidatedLog": true
+    }
+  },
+  "testRunThisRound": false,
+  "reasonNoRerun": "application code unchanged; audit prior test evidence and hashes",
+  "nativeMobile": {
+    "environment": "Linux x86_64",
+    "availableDeviceTools": {
+      "adb": null,
+      "emulator": null,
+      "xcrun": null,
+      "idevice_id": null,
+      "appium": null
+    },
+    "deviceConnectorAvailable": false,
+    "matrix": [
+      {
+        "app": "WPS",
+        "os": "Android",
+        "status": "blocked_not_executed",
+        "reason": "no native device or app session"
+      },
+      {
+        "app": "WPS",
+        "os": "iOS",
+        "status": "blocked_not_executed",
+        "reason": "no native device or app session"
+      },
+      {
+        "app": "Word",
+        "os": "Android",
+        "status": "blocked_not_executed",
+        "reason": "no native device or app session"
+      },
+      {
+        "app": "Word",
+        "os": "iOS",
+        "status": "blocked_not_executed",
+        "reason": "no native device or app session"
+      }
+    ]
+  }
+}

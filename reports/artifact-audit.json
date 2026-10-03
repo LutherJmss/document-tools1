@@ -1,0 +1,18 @@
+{
+  "rc2Images": 72,
+  "v143Images": 82,
+  "rc2DimensionsAndRGBAUnchanged": 72,
+  "textPages": 20,
+  "pageExpectationChecksPassed": 20,
+  "damagedPages": 5,
+  "ocrAttempted": 4,
+  "ocrRepaired": 4,
+  "unsafeRegionsPreservedAsImage": 1,
+  "knownBadUnicodeInOutput": 0,
+  "scannedPagesPreserved": 2,
+  "mixedPagesPreserved": 3,
+  "nativeFormulaRestorations": 4,
+  "nativeFormulaOCRVerified": 0,
+  "simpleTruthTableRows": 5,
+  "wholePDFOCR": false
+}

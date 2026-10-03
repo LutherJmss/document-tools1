@@ -1,0 +1,588 @@
+{
+  "version": "V1.4.3-RC1",
+  "confidenceMeaning": "heuristic risk score, not calibrated probability",
+  "policy": {
+    "fullPdfOCR": false,
+    "traditionalAutoRewrite": false,
+    "ocrBudgetMs": 1200,
+    "maxOCRRegions": 4
+  },
+  "pages": [
+    {
+      "page": 1,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 2,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 3,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "逻辑门",
+        "编码",
+        "触发器",
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 4,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 5,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 6,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "逻辑门",
+        "触发器",
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 7,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 8,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "触发器",
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 9,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": []
+    },
+    {
+      "page": 10,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "数字电子技术"
+      ]
+    },
+    {
+      "page": 11,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "触发器"
+      ]
+    },
+    {
+      "page": 12,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "逻辑门",
+        "触发器"
+      ]
+    },
+    {
+      "page": 13,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制",
+        "逻辑门"
+      ]
+    },
+    {
+      "page": 14,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制",
+        "寄存器",
+        "编码",
+        "触发器"
+      ]
+    },
+    {
+      "page": 15,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "触发器",
+        "网络"
+      ]
+    },
+    {
+      "page": 16,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": []
+    },
+    {
+      "page": 17,
+      "status": "warning",
+      "reason": "text_layer_abnormal",
+      "confidence": 0.62,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0.002,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 18,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制",
+        "逻辑门",
+        "触发器"
+      ]
+    },
+    {
+      "page": 19,
+      "status": "warning",
+      "reason": "text_layer_abnormal",
+      "confidence": 0.62,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 20,
+      "status": "warning",
+      "reason": "text_layer_abnormal",
+      "confidence": 0.62,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 21,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 22,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 23,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 24,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制",
+        "编码"
+      ]
+    },
+    {
+      "page": 25,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 26,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 27,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 28,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 29,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 30,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 31,
+      "status": "warning",
+      "reason": "text_layer_abnormal",
+      "confidence": 0.62,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    },
+    {
+      "page": 32,
+      "status": "ok",
+      "reason": "none",
+      "confidence": 0.98,
+      "abnormalCharacters": 0,
+      "traditionalRatio": 0,
+      "termHits": [
+        "二进制"
+      ]
+    }
+  ],
+  "regions": [
+    {
+      "page": 17,
+      "source": "第1章學長受不 绪论",
+      "status": "image_fallback",
+      "reason": "text_layer_abnormal",
+      "assessment": {
+        "status": "warning",
+        "reason": "text_layer_abnormal",
+        "rareCharacters": 0,
+        "needsRepair": true,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0.125,
+        "termHits": [],
+        "confidence": 0.62
+      },
+      "ocrEnabled": true,
+      "heading": true,
+      "ocrConfidence": 47,
+      "ocrText": "g1%\n绪论\n",
+      "selectionReason": "ocr_not_strictly_better",
+      "navigationAnchor": "第1章 绪论"
+    },
+    {
+      "page": 19,
+      "source": "式中,10、10、10°和10、102为十进制数百位、十位、个位和十分位、百分位的“权”值。它",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 19,
+      "source": "式中,K 为第位数码,在十进制数中,K的取值为0~9中的某个数码。10为十进制数第位的权值。如用R表示R进制的基数,则式(1.2.1)可写成下面的通式",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 19,
+      "source": "(1011.101)2=1×23+0 x 2²+1 x 2'+1 x 2°+1 x 2-1+0 x 2-2+1 x 2-3",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 19,
+      "source": "式中,2、22、2、2°和21、22、23为二进制数各位的权值。下标2表示括号内的",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [
+          "二进制"
+        ],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 19,
+      "source": "同的数码,它的进位规则是逢八进一。各位权值为8(2)的幂。其按权展开式为",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 20,
+      "source": "式中,888°和818-2为八进制数各位的权值。下标8表示括号内的数是八进制数,下标",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 20,
+      "source": "进一,各位权值为16(2)的幂。其按权展开式为",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 20,
+      "source": "式中,162、16、16 16162为十六进制数各位的权值。下标16表示括号内的数是十六进",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    },
+    {
+      "page": 31,
+      "source": "[题1.3]将下列十六进制数转换成二进制数、八进制数和十进制数。(1) (45C) 16 (2) (6DE.C8) 16 (3) (8FE.FD) 16 (4) (79E.FD) 16",
+      "status": "image_fallback",
+      "reason": "uncertain_math_positions",
+      "assessment": {
+        "status": "ok",
+        "reason": "none",
+        "rareCharacters": 0,
+        "needsRepair": false,
+        "abnormalCharacters": 0,
+        "traditionalRatio": 0,
+        "termHits": [
+          "二进制"
+        ],
+        "confidence": 0.98
+      },
+      "ocrEnabled": false,
+      "heading": false,
+      "selectionReason": "unsafe_math_or_ocr_disabled"
+    }
+  ],
+  "formulas": [],
+  "summary": {
+    "ocrAttempted": 1,
+    "ocrRepaired": 0,
+    "textImageFallbacks": 10,
+    "formulaRestored": 0,
+    "formulaImageFallbacks": 44,
+    "formulaOCRAttempted": 0,
+    "formulaOCRVerified": 0,
+    "scannedPagesPreserved": 0,
+    "partialRasterPages": 0,
+    "rasterGapImages": 0,
+    "ocrMs": 81
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "passed": 27,
+  "tests": [
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "identical cross-type content encoded once",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "similar image with one different pixel is not removed",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "true color uses native PNG",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "alpha channel is preserved",
+    "exact encoded bytes dedup without retaining raw pixel cache",
+    "original pixel dimensions retained",
+    "every decoded RGBA pixel matches source",
+    "unsupported compressor safely uses native PNG",
+    "duplicate coordinates crop and encode once",
+    "distinct region dimensions remain separate",
+    "one page render and cleanup for multiple regions"
+  ],
+  "stats": {
+    "imageEncodes": 5,
+    "imageDuplicates": 4,
+    "regionCacheHits": 0,
+    "pageRenders": 0,
+    "uniqueImages": 5,
+    "imageBytes": 1843,
+    "uniqueImageBytes": 1407,
+    "losslessGrayImages": 2,
+    "nativePNGImages": 3,
+    "optimizerFallbacks": 0,
+    "imageClasses": {
+      "text": 1,
+      "formula": 3,
+      "table": 2,
+      "qr": 1,
+      "figure": 2
+    }
+  }
+}

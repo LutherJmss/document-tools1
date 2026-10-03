@@ -1,0 +1,16 @@
+{
+  "viewport": 390,
+  "webOverflow": false,
+  "docxValidZip": true,
+  "pageSizePoints": [
+    288,
+    612
+  ],
+  "bodyFontPoints": 13,
+  "imageWidthsWithinContent": true,
+  "reportDownloadAndInvalidation": true,
+  "missingOCRAssets": "source_image_retained",
+  "nativeWPSMobile": "not_executed_no_device",
+  "nativeWordMobile": "not_executed_no_device",
+  "actualDeviceAcceptance": "pending"
+}

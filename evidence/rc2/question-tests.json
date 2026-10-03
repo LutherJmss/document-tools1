@@ -1,0 +1,13 @@
+{
+  "passed": 8,
+  "tests": [
+    "simple judgement with literal paired answer brackets becomes text",
+    "literal underscores become editable without guessing missing blanks",
+    "missing judgement brackets still fall back",
+    "missing fill rules still fall back",
+    "superscripts and powers still fall back",
+    "displaced small glyph still falls back",
+    "multi-line expressions still fall back",
+    "ordinary choice retains all four option labels"
+  ]
+}

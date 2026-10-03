@@ -1,0 +1,9 @@
+{
+  "fixture": "explicit AND/OR 4-row truth table, separate from textbook",
+  "rc1Regions": 2,
+  "rc2Regions": 2,
+  "pixelsIdentical": true,
+  "editableTable": false,
+  "content": "all 4 input rows and AND/OR values visible",
+  "visualResult": "RC1-existing issue: split into two images with different widths; right/bottom border incomplete. Not a full visual-quality pass."
+}

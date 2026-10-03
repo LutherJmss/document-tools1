@@ -1,0 +1,25 @@
+{
+  "results": [
+    "decimal headings take precedence over numbered lists",
+    "TOC remains outside Heading styles",
+    "options horizontal",
+    "options vertical",
+    "options two rows",
+    "options A/C then B/D",
+    "uncertain C and parentheses fall back only within the question",
+    "fill blanks retain source region",
+    "orphan metrics measure emitted fragments",
+    "exercise stops before next body section",
+    "font mapping preserves source families",
+    "numbered questions above 20 and decimal continuation",
+    "missing choice answer slot retains source question image",
+    "48 real questions and 32 options",
+    "all 14 required body headings",
+    "TOC false positive count is zero",
+    "real textbook retains 7 table fallbacks",
+    "QR masking preserves overlapping long body text",
+    "ordinary two-column reading order",
+    "mixed sizes retain two Word sections"
+  ],
+  "passed": 20
+}

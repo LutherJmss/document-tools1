@@ -1,0 +1,31 @@
+{
+  "results": [
+    "word:smart OK",
+    "word:image OK",
+    "ppt OK",
+    "text OK",
+    "pdfImage OK",
+    "pdfImage OK",
+    "selected page JPG download OK",
+    "word:image OK",
+    "selected page DOCX OK",
+    "ppt OK",
+    "selected page PPTX OK",
+    "text OK",
+    "selected page TXT OK",
+    "invalid conversion range OK",
+    "merge OK",
+    "split OK",
+    "invalid page range OK",
+    "rotate OK",
+    "image OK",
+    "scanned PDF text error OK",
+    "corrupt PDF OK",
+    "encrypted PDF OK",
+    "mobile width 390 OK",
+    "word:edit OK",
+    "mobile DOCX download OK"
+  ],
+  "errors": [],
+  "downloads": 14
+}

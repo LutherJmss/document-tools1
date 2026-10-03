@@ -1,0 +1,20 @@
+{
+  "textbook": {
+    "pages": 33,
+    "pdfBytes": 2580226,
+    "outOfPageBlocks": [],
+    "replacementCharacterPages": [],
+    "visualReview": "all pages reviewed at final pagination",
+    "renderer": "LibreOffice PDF; Poppler PNG; Noto Sans CJK SC",
+    "nativeMobileApps": "not tested"
+  },
+  "mobile": {
+    "pages": 94,
+    "pdfBytes": 2140569,
+    "outOfPageBlocks": [],
+    "replacementCharacterPages": [],
+    "visualReview": "all pages reviewed at final pagination",
+    "renderer": "LibreOffice PDF; Poppler PNG; Noto Sans CJK SC",
+    "nativeMobileApps": "not tested"
+  }
+}

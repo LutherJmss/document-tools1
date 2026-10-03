@@ -1,0 +1,656 @@
+{
+  "rc1Reproduced": true,
+  "rc2Images": 72,
+  "exactPixelMatches": 72,
+  "removedImages": 3,
+  "media": [
+    {
+      "name": "word/media/e66051271501287629f9525afc29a979dd678b97.png",
+      "size": [
+        545,
+        211
+      ],
+      "pixelHash": "889c1325599f468be2cc37620b6e3abf5d454e1bdcc0682e407dc331f716bfd8",
+      "bytes": 10957
+    },
+    {
+      "name": "word/media/d7eac5f79e3f39ee973f70e46e9361193a301a01.png",
+      "size": [
+        112,
+        106
+      ],
+      "pixelHash": "b6a4faf33b1fb829463f7e2bba75c828dd516bda103e2a50e24b67131cf63455",
+      "bytes": 8613
+    },
+    {
+      "name": "word/media/b94069aa3b81a87169dd51e1a416ac794778733a.png",
+      "size": [
+        112,
+        106
+      ],
+      "pixelHash": "3bb988749f3c9fd8b2885ca19f5df22ea1ac590a83e3a1f8cdb981b6e41df8df",
+      "bytes": 8943
+    },
+    {
+      "name": "word/media/00430e983fe516907bc54a149728bba862d31d75.png",
+      "size": [
+        926,
+        329
+      ],
+      "pixelHash": "bec207c33b6b3526525e0966b3029b8a9e8f56edefa0dc7fd9d570cbb63bb297",
+      "bytes": 64734
+    },
+    {
+      "name": "word/media/50f7bf9727f01936206187b7647fa2e46eea20d5.png",
+      "size": [
+        1031,
+        36
+      ],
+      "pixelHash": "482b19a101f8eadc85dafe70777001c84fef0cbf28370401fbe429489f448e8c",
+      "bytes": 7868
+    },
+    {
+      "name": "word/media/ed6bb70b7b0d0458516a23f46f3f4061f5e667de.png",
+      "size": [
+        1100,
+        143
+      ],
+      "pixelHash": "f3cb737cc63e5d4f12a1f05bf3969bef3a1f3e46bc9d7a39c1d83f9de8f8257f",
+      "bytes": 13351
+    },
+    {
+      "name": "word/media/927e3240f147a665f8c8c71f7a9d36e63d687a03.png",
+      "size": [
+        1031,
+        50
+      ],
+      "pixelHash": "e4c15946d8df8bfde7920fb43e469d07ff181ba717234dd75aecfc00cbc6fc1b",
+      "bytes": 4104
+    },
+    {
+      "name": "word/media/9c52dc601b9f7dc121592ce8f109f84aca35a906.png",
+      "size": [
+        1031,
+        56
+      ],
+      "pixelHash": "c9ec941e1835ae2f072f04d4ec56a96db0d8e349c7e724129c6ea802195c5888",
+      "bytes": 4302
+    },
+    {
+      "name": "word/media/4b1302cd0c1718c404b2140946171506358ba8f2.png",
+      "size": [
+        1031,
+        74
+      ],
+      "pixelHash": "60b8e9c150da21bc3b7a4ee3feeff2ab9c86ef407552316f7e19e24e201c6319",
+      "bytes": 4630
+    },
+    {
+      "name": "word/media/4d7cf0491e3e47f9c497bed222b42fe42074e8f8.png",
+      "size": [
+        1031,
+        36
+      ],
+      "pixelHash": "4664251202d3938fbe932659b301cc88e908a1974649da9e15340f837281dfd8",
+      "bytes": 7051
+    },
+    {
+      "name": "word/media/076e65e788b46c4e224aebd6209e3e882f87ba3d.png",
+      "size": [
+        1031,
+        32
+      ],
+      "pixelHash": "9838f36c47da960fe58525fa5771f87ccd1834764d321951c21845d337bfb098",
+      "bytes": 4114
+    },
+    {
+      "name": "word/media/33f5b2d78e73469802b536a459cb0341ee28ffbd.png",
+      "size": [
+        1031,
+        38
+      ],
+      "pixelHash": "a0c936c58f515ff87578990fdf2bb1b7f19de6c6f1e987648f3764442407770e",
+      "bytes": 8521
+    },
+    {
+      "name": "word/media/3145b92780fe3b50e95657b0d7377b7b01f8b6be.png",
+      "size": [
+        951,
+        475
+      ],
+      "pixelHash": "3d4bcd805b79ca9297b1eced658a82f147f60ec2ad4e2726e6e01a43a812980f",
+      "bytes": 70716
+    },
+    {
+      "name": "word/media/88cfb71252219630d188344b2e5916b76dc5b118.png",
+      "size": [
+        1031,
+        147
+      ],
+      "pixelHash": "2fc8e0c8c7d313a18829e4828119718ba4a834c7282c1b992be842533927384c",
+      "bytes": 21507
+    },
+    {
+      "name": "word/media/5c94184fd08d1b66f267123d4ed77f42bd48f81c.png",
+      "size": [
+        1037,
+        70
+      ],
+      "pixelHash": "190f00ec87938d40fdc7512227ec77f04b5b31f4bf85aa7c879b3daeef7d9703",
+      "bytes": 11869
+    },
+    {
+      "name": "word/media/661b3c940baec9564bd9ef1980be9e0dbcabf7bb.png",
+      "size": [
+        1087,
+        776
+      ],
+      "pixelHash": "4e370e4ba977b5cecfd4a7ffe322bc6bc80da9b6b48ee0e84e854c6187eca0bc",
+      "bytes": 94199
+    },
+    {
+      "name": "word/media/d0400c1e32791e06280c9172c7cf416b88367162.png",
+      "size": [
+        1031,
+        522
+      ],
+      "pixelHash": "e422497b1ed2d14712ff71c8bf3310caa08db394549d06bfbe2b14d1344e23c4",
+      "bytes": 85085
+    },
+    {
+      "name": "word/media/4f0cdc7dbff3797d8e0a78c06797cc1ec3e5ec57.png",
+      "size": [
+        1031,
+        32
+      ],
+      "pixelHash": "3c6d68efdfefcc40e5cdaf0e2439491c3090c587b77ff15a96e2a4696e34097b",
+      "bytes": 16000
+    },
+    {
+      "name": "word/media/e91eca9b5305b5ef72b1bde69eadaa926a33f0de.png",
+      "size": [
+        1031,
+        240
+      ],
+      "pixelHash": "88d081b5a514f515a6927508f33d0d161053c71fa33fba8712197656109097a8",
+      "bytes": 14933
+    },
+    {
+      "name": "word/media/5b03050ee14faf6b5461e0731650008e0e701758.png",
+      "size": [
+        1031,
+        74
+      ],
+      "pixelHash": "b4fd53d09a10b8a65a07c596a7b6d56a0532b3be203585a15009faf581b1cd0a",
+      "bytes": 3068
+    },
+    {
+      "name": "word/media/80430e0da3a1876fe60ad48bac5776829539d370.png",
+      "size": [
+        1031,
+        123
+      ],
+      "pixelHash": "2f7e5e535c00602bf3d8d79ca84552e9307595df807eaf377dfc9425ab673370",
+      "bytes": 10836
+    },
+    {
+      "name": "word/media/dcb83fe34b08dda86e8dc3a0feb26912a8dcb440.png",
+      "size": [
+        1043,
+        32
+      ],
+      "pixelHash": "0c61eb49cb3bc9a7cea1ebbd935762ac2d5ce7dd1a9b72606c04f5267fbb5526",
+      "bytes": 15826
+    },
+    {
+      "name": "word/media/fb15cf032d68ab92e392763b9316183f48b3d86b.png",
+      "size": [
+        1089,
+        244
+      ],
+      "pixelHash": "7f01d302af1af8d44bc79b8a6c9fd29551af98ec0c6471ace57339b1ad888072",
+      "bytes": 14059
+    },
+    {
+      "name": "word/media/525fe49e37938442e189823ae9b7c001fe4a872d.png",
+      "size": [
+        1088,
+        243
+      ],
+      "pixelHash": "2391af0f03fdc14e83889ad8b8cc7543c90bfaa24cfd34aad33fad7f20461119",
+      "bytes": 18818
+    },
+    {
+      "name": "word/media/f6640896e2f0e2048f2944b10653816819531e6f.png",
+      "size": [
+        930,
+        177
+      ],
+      "pixelHash": "395883f6364502404dd4f973b2e62dc9631d0b98aa6419f18488fdbfebae99b6",
+      "bytes": 58766
+    },
+    {
+      "name": "word/media/1344e376cc2075a1bca2f866165c3544f3cd57e1.png",
+      "size": [
+        923,
+        510
+      ],
+      "pixelHash": "1576b54d0f8f5fc4c1d25ebcffa2bf961a6e62deb288c643fac8fdc20bcde1f3",
+      "bytes": 79615
+    },
+    {
+      "name": "word/media/716ea4f40b2eabf9d22362d2e9579a3c29dec1b6.png",
+      "size": [
+        1031,
+        106
+      ],
+      "pixelHash": "94ffed5739e45ecb7c4c59006e2cbb7feccdd577dd5b940413a3297b3d063b18",
+      "bytes": 15509
+    },
+    {
+      "name": "word/media/1eeedfbde7286ad4e0ad38ce88c652ccf727869f.png",
+      "size": [
+        954,
+        672
+      ],
+      "pixelHash": "a256cc560a8b5be6cb15fcb56524151bf8513ec14ea269922811a4fc9ecd52ee",
+      "bytes": 54358
+    },
+    {
+      "name": "word/media/18b8884ee7074d0f926accab0e1988e42cf1e1e8.png",
+      "size": [
+        957,
+        208
+      ],
+      "pixelHash": "3cacfed214511bba2dff6f4031d4ec569874b3b076f20bd3f81bf5cffc1d191f",
+      "bytes": 37112
+    },
+    {
+      "name": "word/media/2925edbc27faf9481945ad019a767f43d3877c4a.png",
+      "size": [
+        956,
+        427
+      ],
+      "pixelHash": "b069c655579c855cfe27b766dc9bb03c5fc6bbcb56629da36c6862d2148ec6c5",
+      "bytes": 58324
+    },
+    {
+      "name": "word/media/9197c4178dd7b71fe90d7b2da59afded3e809022.png",
+      "size": [
+        1031,
+        74
+      ],
+      "pixelHash": "952434c1bdd2915c0b230c9338c941db59e1075bf4aebdf0c3a84312ee165808",
+      "bytes": 10116
+    },
+    {
+      "name": "word/media/c7a36d76d2ffaf9b508e4b6ab0cffdab41a31067.png",
+      "size": [
+        1031,
+        178
+      ],
+      "pixelHash": "ea533aac864a8e3e59b5298ae5a8608f58a96e0ba6dbecc7273b15b8fd8ac200",
+      "bytes": 13672
+    },
+    {
+      "name": "word/media/8735faf68e1797576fedbb28710366edb018447e.png",
+      "size": [
+        1031,
+        34
+      ],
+      "pixelHash": "14157a1e9433ca5610f872d5c6a667332ba0e15eee3a810fb99076763151c5ee",
+      "bytes": 5626
+    },
+    {
+      "name": "word/media/0e989c5147215173d12be32ab386c81b1dc73c31.png",
+      "size": [
+        1079,
+        183
+      ],
+      "pixelHash": "88c3bd6fe92e50df031a3e93d21a337c02483e71489dd71bf15762845800de31",
+      "bytes": 14007
+    },
+    {
+      "name": "word/media/38dde66de6e58ae612cab627b6cc11730efa1c78.png",
+      "size": [
+        1031,
+        68
+      ],
+      "pixelHash": "42802661bf9a30905c1ea1ddd9857c7824b0810862bf0f57a3bf81f25c3097f6",
+      "bytes": 9721
+    },
+    {
+      "name": "word/media/e3f1ab146566bd4f09def21f265f975dcdcabda8.png",
+      "size": [
+        1075,
+        349
+      ],
+      "pixelHash": "fae179adc80bc9236f6f8ab34b87748e9e2c5a145bb38ae7e3ac34de25127426",
+      "bytes": 38241
+    },
+    {
+      "name": "word/media/83b90f43a6e7e65b530763e0f42c03fb6a30fe59.png",
+      "size": [
+        1073,
+        292
+      ],
+      "pixelHash": "dbd75d4bb9a3c0e15e213a6a5099edd1d4ba0d7039a6cae2b216449222b51629",
+      "bytes": 18167
+    },
+    {
+      "name": "word/media/2e8fd597b863da9f1e0dfb8a2926ef604c5c867d.png",
+      "size": [
+        1031,
+        118
+      ],
+      "pixelHash": "f76b29a1324cc42d726d2f067cb70dc3a5de882f8b141ce1579bcc377ed3e55e",
+      "bytes": 13533
+    },
+    {
+      "name": "word/media/367802d139ca2bfc4b3022e9ba072d3d6ddd17a9.png",
+      "size": [
+        1031,
+        107
+      ],
+      "pixelHash": "b4c50874588165e44aa56c950032d6e02be82930057891be4d4bcf9193796580",
+      "bytes": 15498
+    },
+    {
+      "name": "word/media/5d92007863a62edfd0f56c0ddce822df7c60a1e7.png",
+      "size": [
+        1031,
+        74
+      ],
+      "pixelHash": "ad17c8d55d7717111752d5f8c4c043caa517a65427e65bba84889462a2af6022",
+      "bytes": 13442
+    },
+    {
+      "name": "word/media/f17429aaffeecb5a5f7624f30f8fe083174d5c2e.png",
+      "size": [
+        112,
+        106
+      ],
+      "pixelHash": "8cd1291032d9ec3ecfb0101220013020d51baf5cb4302a67ff1b4fd8c3fb9ca7",
+      "bytes": 8726
+    },
+    {
+      "name": "word/media/4fa1523ba95a2a8202e6b3b54596482a14667f56.png",
+      "size": [
+        1031,
+        74
+      ],
+      "pixelHash": "b76a55e32da944b0390e6d5223b7f987a0cfa64bdde66d9bb1239710b88e7058",
+      "bytes": 14265
+    },
+    {
+      "name": "word/media/391225e2186470ebea5d5fe5948ed4f9d153e2d5.png",
+      "size": [
+        1031,
+        68
+      ],
+      "pixelHash": "2322a00eb34950c9e8bccf2fd817458521458356525dc7e522afa3e4845aae05",
+      "bytes": 21054
+    },
+    {
+      "name": "word/media/1704d4e0b4ef4943227673579b0425cfaacf5d9b.png",
+      "size": [
+        1031,
+        223
+      ],
+      "pixelHash": "ba2b89098c4b0f208b3d26fb82d151f66252b5eb140105a766f82a8285569dea",
+      "bytes": 11409
+    },
+    {
+      "name": "word/media/41547539d997eae9ef6d8b3f8326b54f934e6e0d.png",
+      "size": [
+        1031,
+        109
+      ],
+      "pixelHash": "4560b1af7faaed3564c5929fe270efa722791f837ba57e16f03673e8b6be2e07",
+      "bytes": 7956
+    },
+    {
+      "name": "word/media/f8c0e5d6f9c301fa2165f427124950da96edbaa0.png",
+      "size": [
+        1044,
+        252
+      ],
+      "pixelHash": "83606316d2ca2c394d96ff295f1e5ccfc070c5d255f0b26ffe6317ed4d1043dd",
+      "bytes": 43513
+    },
+    {
+      "name": "word/media/7104701bcdaabe8059ac9aa74108f9ce708ed202.png",
+      "size": [
+        955,
+        67
+      ],
+      "pixelHash": "5b4382a74bf379d2b6af0dbf587799335c3625cda5258332c7526be5ef3f4da3",
+      "bytes": 14324
+    },
+    {
+      "name": "word/media/9a44f0e15a4e32c0f2f577749c379a3b953e6136.png",
+      "size": [
+        955,
+        35
+      ],
+      "pixelHash": "063194fdca39dbce7dbc85c7b550bfbce2c0e1dd8a8482e7584c4589bc2fb00b",
+      "bytes": 15465
+    },
+    {
+      "name": "word/media/1ba101002c21fa8563880ec3cf22cc776100ca15.png",
+      "size": [
+        956,
+        36
+      ],
+      "pixelHash": "90821dbfc1f2352245984f8b187e22ca2489456a4e7d8861710de3a596211f52",
+      "bytes": 11004
+    },
+    {
+      "name": "word/media/5161109980c520dae2633852da422459dec93b10.png",
+      "size": [
+        998,
+        67
+      ],
+      "pixelHash": "be7f16e0292c1120078543a0339e73e46d93927dd2bd56c4d31dc1ef1446e8f3",
+      "bytes": 22092
+    },
+    {
+      "name": "word/media/194c0e6308a9f38cb6d52db5178a6de8562ed471.png",
+      "size": [
+        955,
+        35
+      ],
+      "pixelHash": "debc141f1a581282fb9e0021255a009526a0cebbcb5c0152ac81e4fa7272b706",
+      "bytes": 12421
+    },
+    {
+      "name": "word/media/346d83dfbfc38b97bc532bef7c8495a16406301c.png",
+      "size": [
+        954,
+        36
+      ],
+      "pixelHash": "71d81849e02e049125bdf949f5acd791152c88fe7ee9f2221cbf98b31442f253",
+      "bytes": 9648
+    },
+    {
+      "name": "word/media/1549e20234722123160968258f30fb3d0236a7b8.png",
+      "size": [
+        953,
+        69
+      ],
+      "pixelHash": "7bb79d3b7f807d22adc5da4be923a4dc545f8277b27452758b81f487b0108d46",
+      "bytes": 19405
+    },
+    {
+      "name": "word/media/2df4c367b973b341187595630d6dda0e72bed419.png",
+      "size": [
+        955,
+        37
+      ],
+      "pixelHash": "049b11e537c0ef3ebac5f04846e7441ab51e6a5fe21230bd5d4a4baf42351b98",
+      "bytes": 10279
+    },
+    {
+      "name": "word/media/0c8c18b4462b7b1275d9df1bcead5ede4560b183.png",
+      "size": [
+        953,
+        38
+      ],
+      "pixelHash": "620a1a503517ea1b34e09f36daec90fa228730d0997aff61504555ee2e914c9b",
+      "bytes": 14743
+    },
+    {
+      "name": "word/media/5979496d4bcdafd73b81b1bb003897508ac5c591.png",
+      "size": [
+        955,
+        34
+      ],
+      "pixelHash": "74b8cb64e2556bfbc5b63a408359265c46946c8432d6df16786867164dd5075f",
+      "bytes": 15677
+    },
+    {
+      "name": "word/media/207d373d2dc626a30177c804b5839736dab1eb88.png",
+      "size": [
+        953,
+        36
+      ],
+      "pixelHash": "365d66d490ebe4aeadf0a82409204c3bc2abea5e5902cd6ad212c684c15d341a",
+      "bytes": 13423
+    },
+    {
+      "name": "word/media/935b89041d98090a0a780edd1bbf315fd606ce67.png",
+      "size": [
+        951,
+        34
+      ],
+      "pixelHash": "00797447e8421eea15e28bf115cb5120edb4d387f0c42073d168abd181177ce3",
+      "bytes": 11649
+    },
+    {
+      "name": "word/media/948d0bebd67dfd02982cea053f717b33547ddc75.png",
+      "size": [
+        953,
+        49
+      ],
+      "pixelHash": "4f277824501306e29540621212055a51cd8bb2adf9d5e456dcfc7d939c162991",
+      "bytes": 13182
+    },
+    {
+      "name": "word/media/22ef3d6361518ec398b29cca9644ff78b2f57254.png",
+      "size": [
+        1036,
+        71
+      ],
+      "pixelHash": "67c790ad677b21bf8630d5447f68c78da9f9fdbd28cddd10102a056743b685d1",
+      "bytes": 14574
+    },
+    {
+      "name": "word/media/b26fd00ac03f821fcd1439ddeee6f1be42b87830.png",
+      "size": [
+        1035,
+        165
+      ],
+      "pixelHash": "c30156f18a5129476ac51eed49c28a91464f01c10c316cb2484f19baf2da79e9",
+      "bytes": 25498
+    },
+    {
+      "name": "word/media/1738ce70ee0d13ae19cd27b4f8d012099430b684.png",
+      "size": [
+        1036,
+        70
+      ],
+      "pixelHash": "fd47cc8847fa7573a80c00ce68d4d8241bf08d159d531d261da16bfcfbfd7fac",
+      "bytes": 14698
+    },
+    {
+      "name": "word/media/5395e49820d89bb0893f0a81e245b49633c9d1e9.png",
+      "size": [
+        1034,
+        69
+      ],
+      "pixelHash": "d9b742a8c403a9eef6e76fb0f91b5680cde873f55761cb3e7b07096a47b40a0b",
+      "bytes": 14264
+    },
+    {
+      "name": "word/media/6c1b37324a0a7e9e54840a3cdc48ab018502df80.png",
+      "size": [
+        1033,
+        70
+      ],
+      "pixelHash": "b622cfd04ec59d9593a4153ee2c86d07478d39f463f95387c938d30a6b058070",
+      "bytes": 14305
+    },
+    {
+      "name": "word/media/77b2beefae9456ce587a65a1a3ef326383f419ab.png",
+      "size": [
+        1034,
+        69
+      ],
+      "pixelHash": "54964425abbff769dbd41d17ea06212d9687978a0addd8000047aec860c10159",
+      "bytes": 12798
+    },
+    {
+      "name": "word/media/af569dc993143d5fc7ff06cb21a1e93e82b4f107.png",
+      "size": [
+        1034,
+        75
+      ],
+      "pixelHash": "256f04aaec3f23b62f85f2c4858a793f5d51d56faa6297372fdd6d0d48478d9c",
+      "bytes": 20089
+    },
+    {
+      "name": "word/media/6bcc7c9319094a6c3e52cf2676e01b7613e9f274.png",
+      "size": [
+        853,
+        72
+      ],
+      "pixelHash": "640fd000fb2446e39f6a4bb1273cc610e8332872c2b50eac8e0c65c85202e51d",
+      "bytes": 19835
+    },
+    {
+      "name": "word/media/965165a160b3586314657b51e52747852c9c0094.png",
+      "size": [
+        837,
+        73
+      ],
+      "pixelHash": "b23c8f1d1f70d9477cf92b52cb235fbaec544da7ff627c65c3a263913da78f56",
+      "bytes": 21864
+    },
+    {
+      "name": "word/media/902dac25db1736bc1a95361596d8ab94f738b2e8.png",
+      "size": [
+        543,
+        110
+      ],
+      "pixelHash": "b64c40991978a40d7a5f135e1996237366906f70575bf454e374011866bd4efa",
+      "bytes": 22881
+    },
+    {
+      "name": "word/media/7426dc1fb755c1e9c8964cf20a86ab6ea690a085.png",
+      "size": [
+        847,
+        72
+      ],
+      "pixelHash": "063fcf5924efb703a65ef22fa30b2d1467449d17e9096766bb63280aa92fbefb",
+      "bytes": 21019
+    },
+    {
+      "name": "word/media/d9d01146dd866bb17c4b014afdb0e93cea6a6a5d.png",
+      "size": [
+        574,
+        108
+      ],
+      "pixelHash": "73abcd3f711a48da906a2733b6e2346141905ba427a0dff4b5788b5f2bfe12a4",
+      "bytes": 24790
+    },
+    {
+      "name": "word/media/3db3da253bb417b7306647efbfd2b314fb82e51a.png",
+      "size": [
+        894,
+        120
+      ],
+      "pixelHash": "2e7354fe281f56eb69b0c8d2bf172e2629f99bd9499ab8add62f897e962ff27d",
+      "bytes": 40002
+    }
+  ]
+}
